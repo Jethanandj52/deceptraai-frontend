@@ -11,9 +11,23 @@ const COLORS = {
 
 /** Badge — small color-coded status pill used across tables. */
 export default function Badge({ status }) {
-  const classes = COLORS[status] || 'bg-white/10 text-muted border-border';
+  const classes =
+    COLORS[status] ||
+    'bg-slate-500/10 dark:bg-white/10 text-[var(--text-secondary)] border-[var(--border-color)]';
+
   return (
-    <span className={`inline-block px-2.5 py-1 rounded-full text-xs font-semibold border ${classes}`}>
+    <span
+      className={`
+        inline-block
+        px-2.5 py-1
+        rounded-full
+        text-xs
+        font-semibold
+        border
+        whitespace-nowrap
+        ${classes}
+      `}
+    >
       {status}
     </span>
   );

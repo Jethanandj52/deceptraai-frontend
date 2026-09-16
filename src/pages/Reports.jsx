@@ -15,74 +15,267 @@ export default function Reports() {
 
   const filtered = interviews.filter((iv) => {
     const matchesSearch =
-      iv.candidate?.name.toLowerCase().includes(search.toLowerCase()) ||
-      iv.position.toLowerCase().includes(search.toLowerCase());
-    const matchesStatus = !statusFilter || iv.status === statusFilter;
+      iv.candidate?.name
+        .toLowerCase()
+        .includes(search.toLowerCase()) ||
+      iv.position
+        .toLowerCase()
+        .includes(search.toLowerCase());
+
+    const matchesStatus =
+      !statusFilter ||
+      iv.status === statusFilter;
+
     return matchesSearch && matchesStatus;
   });
 
   return (
     <AdminLayout title="Reports">
-      <div className="flex flex-wrap gap-3 mb-4">
+
+      {/* =====================================================
+          Search + Filter
+      ====================================================== */}
+
+      <div
+        className="
+          flex
+          flex-col
+          sm:flex-row
+          gap-2 sm:gap-3
+          mb-4 sm:mb-5
+        "
+      >
         <input
           type="text"
           placeholder="Search candidate or position…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="bg-white/[0.04] border border-border rounded-lg px-3 py-2 text-sm text-slate-100 outline-none focus:border-blue2 w-64"
+          className="
+            w-full
+            sm:w-64
+            bg-[var(--input-bg)]
+            border border-[var(--border-color)]
+            rounded-lg
+            px-3 py-2.5
+            text-sm
+            text-[var(--text-primary)]
+            placeholder:text-[var(--text-secondary)]
+            outline-none
+            focus:border-blue2
+            transition-colors
+          "
         />
+
         <select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value)}
-          className="bg-white/[0.04] border border-border rounded-lg px-3 py-2 text-sm text-slate-100 outline-none focus:border-blue2"
+          className="
+            w-full
+            sm:w-auto
+            min-w-0
+            bg-[var(--input-bg)]
+            border border-[var(--border-color)]
+            rounded-lg
+            px-3 py-2.5
+            text-sm
+            text-[var(--text-primary)]
+            outline-none
+            focus:border-blue2
+            transition-colors
+          "
         >
-          <option value="">All Statuses</option>
-          <option value="Completed">Completed</option>
-          <option value="Pending">Pending</option>
-          <option value="InProgress">In Progress</option>
-          <option value="Expired">Expired</option>
+          <option
+            value=""
+            className="bg-[var(--bg-secondary)]"
+          >
+            All Statuses
+          </option>
+
+          <option
+            value="Completed"
+            className="bg-[var(--bg-secondary)]"
+          >
+            Completed
+          </option>
+
+          <option
+            value="Pending"
+            className="bg-[var(--bg-secondary)]"
+          >
+            Pending
+          </option>
+
+          <option
+            value="InProgress"
+            className="bg-[var(--bg-secondary)]"
+          >
+            In Progress
+          </option>
+
+          <option
+            value="Expired"
+            className="bg-[var(--bg-secondary)]"
+          >
+            Expired
+          </option>
         </select>
       </div>
 
-      <div className="bg-card border border-border rounded-xl p-5">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="text-left text-muted text-xs uppercase font-mono border-b border-border">
-              <th className="pb-2">Candidate</th>
-              <th className="pb-2">Position</th>
-              <th className="pb-2">Score</th>
-              <th className="pb-2">Date</th>
-              <th className="pb-2">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filtered.map((iv) => (
-              <tr key={iv._id} className="border-b border-border/50 last:border-0">
-                <td className="py-2.5 text-slate-100">{iv.candidate?.name}</td>
-                <td className="py-2.5 text-muted">{iv.position}</td>
-                <td className="py-2.5 text-slate-100">{iv.overallScore != null ? `${Math.round(iv.overallScore)}%` : '—'}</td>
-                <td className="py-2.5 text-muted">{new Date(iv.createdAt).toLocaleDateString()}</td>
-                <td className="py-2.5">
-                  {iv.status === 'Completed' ? (
-                    <Link to={`/interviews/${iv._id}/report`} className="text-blue2 hover:underline">
-                      View
-                    </Link>
-                  ) : (
-                    <span className="text-muted">—</span>
-                  )}
-                </td>
+
+      {/* =====================================================
+          Reports Table
+      ====================================================== */}
+
+      <div
+        className="
+          w-full
+          bg-[var(--bg-secondary)]
+          border border-[var(--border-color)]
+          rounded-xl
+          p-3 sm:p-4 md:p-5
+          overflow-hidden
+          transition-colors duration-300
+        "
+      >
+        <div className="w-full overflow-x-auto">
+          <table className="w-full min-w-[700px] text-sm">
+
+            <thead>
+              <tr
+                className="
+                  text-left
+                  text-[var(--text-secondary)]
+                  text-xs
+                  uppercase
+                  font-mono
+                  border-b border-[var(--border-color)]
+                "
+              >
+                <th className="pb-2 pr-4">
+                  Candidate
+                </th>
+
+                <th className="pb-2 pr-4">
+                  Position
+                </th>
+
+                <th className="pb-2 pr-4">
+                  Score
+                </th>
+
+                <th className="pb-2 pr-4">
+                  Date
+                </th>
+
+                <th className="pb-2">
+                  Action
+                </th>
               </tr>
-            ))}
-            {filtered.length === 0 && (
-              <tr>
-                <td colSpan={5} className="py-6 text-center text-muted">
-                  No reports found.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
+            </thead>
+
+            <tbody>
+              {filtered.map((iv) => (
+                <tr
+                  key={iv._id}
+                  className="
+                    border-b
+                    border-[var(--border-color)]/50
+                    last:border-0
+                  "
+                >
+
+                  <td
+                    className="
+                      py-3
+                      pr-4
+                      text-[var(--text-primary)]
+                      font-medium
+                      break-words
+                    "
+                  >
+                    {iv.candidate?.name}
+                  </td>
+
+                  <td
+                    className="
+                      py-3
+                      pr-4
+                      text-[var(--text-secondary)]
+                      break-words
+                    "
+                  >
+                    {iv.position}
+                  </td>
+
+                  <td
+                    className="
+                      py-3
+                      pr-4
+                      text-[var(--text-primary)]
+                      font-semibold
+                      whitespace-nowrap
+                    "
+                  >
+                    {iv.overallScore != null
+                      ? `${Math.round(iv.overallScore)}%`
+                      : '—'}
+                  </td>
+
+                  <td
+                    className="
+                      py-3
+                      pr-4
+                      text-[var(--text-secondary)]
+                      whitespace-nowrap
+                    "
+                  >
+                    {new Date(
+                      iv.createdAt
+                    ).toLocaleDateString()}
+                  </td>
+
+                  <td className="py-3">
+                    {iv.status === 'Completed' ? (
+                      <Link
+                        to={`/interviews/${iv._id}/report`}
+                        className="
+                          text-blue2
+                          hover:underline
+                          whitespace-nowrap
+                        "
+                      >
+                        View
+                      </Link>
+                    ) : (
+                      <span className="text-[var(--text-secondary)]">
+                        —
+                      </span>
+                    )}
+                  </td>
+
+                </tr>
+              ))}
+
+              {filtered.length === 0 && (
+                <tr>
+                  <td
+                    colSpan={5}
+                    className="
+                      py-8
+                      text-center
+                      text-[var(--text-secondary)]
+                    "
+                  >
+                    No reports found.
+                  </td>
+                </tr>
+              )}
+            </tbody>
+
+          </table>
+        </div>
       </div>
+
     </AdminLayout>
   );
 }

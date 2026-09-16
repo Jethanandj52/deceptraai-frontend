@@ -9,17 +9,30 @@ export default function DistributionBar({ low, moderate, high }) {
   ];
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 sm:gap-4">
       {rows.map((r) => (
-        <div key={r.label}>
-          <div className="flex justify-between text-xs mb-1">
-            <span className="text-muted">{r.label}</span>
-            <span className="font-semibold" style={{ color: r.color }}>
+        <div key={r.label} className="min-w-0">
+          <div className="flex items-center justify-between gap-3 text-xs mb-1.5">
+            <span className="text-[var(--text-secondary)] truncate">
+              {r.label}
+            </span>
+
+            <span
+              className="font-semibold shrink-0"
+              style={{ color: r.color }}
+            >
               {r.value}%
             </span>
           </div>
-          <div className="h-2 rounded-full bg-white/[0.06] overflow-hidden">
-            <div className="h-full rounded-full" style={{ width: `${r.value}%`, background: r.color }} />
+
+          <div className="h-2 sm:h-2.5 rounded-full bg-slate-200 dark:bg-white/[0.06] overflow-hidden">
+            <div
+              className="h-full rounded-full transition-all duration-300"
+              style={{
+                width: `${r.value}%`,
+                background: r.color,
+              }}
+            />
           </div>
         </div>
       ))}

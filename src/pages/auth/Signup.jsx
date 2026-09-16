@@ -76,18 +76,18 @@ export default function Signup() {
         {/* Logo */}
         <div className="text-center mb-6">
 
-          <div className="relative inline-flex mb-3">
-
-            <div className="absolute inset-0 bg-blue-500/30 blur-2xl rounded-full" />
-
-            <div className="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-xl shadow-blue-500/25 border border-white/10">
-
-              <span className="text-2xl">
-                🤖
-              </span>
-
-            </div>
-
+           <div className="flex justify-center mb-3">
+            <img
+              src="/logo.png"
+              alt="DeceptionAI Logo"
+              className="
+                w-16
+                h-16
+                sm:w-20
+                sm:h-20
+                object-contain
+              "
+            />
           </div>
 
           <h1 className="text-3xl font-black tracking-tight">

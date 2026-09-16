@@ -328,14 +328,31 @@ export default function CreateInterview() {
         onSubmit={
           handleSubmit
         }
-        className="max-w-2xl bg-card border border-border rounded-xl p-6 flex flex-col gap-6"
+         className="
+         w-full
+          max-w-xl
+          mx-auto
+          bg-[var(--bg-secondary)]
+          border border-[var(--border-color)]
+          rounded-xl
+          p-4 sm:p-5 md:p-6 lg:p-8
+          
+          transition-colors duration-300
+      "
       >
 
         {/* ERROR */}
 
         {error && (
 
-          <div className="text-xs text-rose-300 bg-rose-500/10 border border-rose-500/25 rounded-lg px-3 py-2">
+          <div className="
+            text-xs
+            text-rose-300
+            bg-rose-500/10
+            border border-rose-500/25
+            rounded-lg
+            px-3 py-2
+          ">
             {error}
           </div>
 
@@ -348,7 +365,13 @@ export default function CreateInterview() {
 
         <div>
 
-          <label className="block text-sm font-bold text-white mb-2">
+          <label className="
+            block
+            text-sm
+            font-bold
+            text-[var(--text-primary)]
+            mb-2
+          ">
             1. Select Candidate
           </label>
 
@@ -360,7 +383,18 @@ export default function CreateInterview() {
                 event.target.value
               )
             }
-            className="w-full bg-navy2 border border-border rounded-lg px-3 py-2.5 text-sm text-slate-100 outline-none focus:border-blue2"
+            className="
+              w-full
+              bg-[var(--input-bg)]
+              border border-[var(--border-color)]
+              rounded-lg
+              px-3 py-2.5
+              text-sm
+              text-[var(--text-primary)]
+              outline-none
+              focus:border-blue2
+              transition-colors
+            "
           >
 
             <option value="">
@@ -398,7 +432,13 @@ export default function CreateInterview() {
 
         <div>
 
-          <label className="block text-sm font-bold text-white mb-2">
+          <label className="
+            block
+            text-sm
+            font-bold
+            text-[var(--text-primary)]
+            mb-2
+          ">
             2. Position
           </label>
 
@@ -411,7 +451,19 @@ export default function CreateInterview() {
               )
             }
             placeholder="Software Engineer"
-            className="w-full bg-navy2 border border-border rounded-lg px-3 py-2.5 text-sm text-slate-100 outline-none focus:border-blue2"
+            className="
+              w-full
+              bg-[var(--input-bg)]
+              border border-[var(--border-color)]
+              rounded-lg
+              px-3 py-2.5
+              text-sm
+              text-[var(--text-primary)]
+              placeholder:text-[var(--text-secondary)]
+              outline-none
+              focus:border-blue2
+              transition-colors
+            "
           />
 
         </div>
@@ -423,19 +475,37 @@ export default function CreateInterview() {
 
         <div>
 
-          <label className="block text-sm font-bold text-white mb-2">
+          <label className="
+            block
+            text-sm
+            font-bold
+            text-[var(--text-primary)]
+            mb-2
+          ">
             3. Interview Type
           </label>
 
 
-          <div className="flex gap-4 flex-wrap">
+          <div className="
+            flex
+            flex-wrap
+            gap-3 sm:gap-4
+          ">
 
             {TYPES.map(
               (item) => (
 
                 <label
                   key={item}
-                  className="flex items-center gap-2 text-sm text-slate-100"
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                    text-sm
+                    text-[var(--text-primary)]
+                    cursor-pointer
+                    whitespace-nowrap
+                  "
                 >
 
                   <input
@@ -466,12 +536,29 @@ export default function CreateInterview() {
 
         <div>
 
-          <label className="block text-sm font-bold text-white mb-2">
+          <label className="
+            block
+            text-sm
+            font-bold
+            text-[var(--text-primary)]
+            mb-2
+          ">
             4. Select Questions
           </label>
 
 
-          <div className="flex flex-col gap-2 max-h-56 overflow-y-auto bg-navy2 border border-border rounded-lg p-3">
+          <div className="
+            flex
+            flex-col
+            gap-2
+            max-h-56
+            overflow-y-auto
+            bg-[var(--input-bg)]
+            border border-[var(--border-color)]
+            rounded-lg
+            p-3
+            transition-colors
+          ">
 
             {questions.map(
               (question) => (
@@ -480,7 +567,18 @@ export default function CreateInterview() {
                   key={
                     question._id
                   }
-                  className="flex items-start gap-2 text-sm text-slate-100 cursor-pointer"
+                  className="
+                    flex
+                    items-start
+                    gap-2
+                    text-sm
+                    text-[var(--text-primary)]
+                    cursor-pointer
+                    p-1
+                    rounded
+                    hover:bg-slate-500/[0.05]
+                    dark:hover:bg-white/[0.03]
+                  "
                 >
 
                   <input
@@ -495,18 +593,23 @@ export default function CreateInterview() {
                         question
                       )
                     }
-                    className="mt-1"
+                    className="mt-1 shrink-0"
                   />
 
 
-                  <div>
+                  <div className="min-w-0">
 
-                    <div>
+                    <div className="break-words">
                       {question.text}
                     </div>
 
 
-                    <div className="text-xs text-blue2 mt-1">
+                    <div className="
+                      text-xs
+                      text-blue2
+                      mt-1
+                      break-words
+                    ">
 
                       {question.type ||
                         'Paragraph'}
@@ -532,7 +635,10 @@ export default function CreateInterview() {
             {questions.length ===
               0 && (
 
-              <p className="text-muted text-sm">
+              <p className="
+                text-[var(--text-secondary)]
+                text-sm
+              ">
                 No questions in your
                 question bank yet.
               </p>
@@ -550,12 +656,23 @@ export default function CreateInterview() {
 
         <div>
 
-          <label className="block text-sm font-bold text-white mb-2">
+          <label className="
+            block
+            text-sm
+            font-bold
+            text-[var(--text-primary)]
+            mb-2
+          ">
             5. Interview Settings
           </label>
 
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="
+            grid
+            grid-cols-1
+            sm:grid-cols-2
+            gap-2
+          ">
 
             {[
               [
@@ -591,7 +708,15 @@ export default function CreateInterview() {
 
                 <label
                   key={key}
-                  className="flex items-center gap-2 text-sm text-slate-100"
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                    text-sm
+                    text-[var(--text-primary)]
+                    cursor-pointer
+                    py-1
+                  "
                 >
 
                   <input
@@ -604,9 +729,12 @@ export default function CreateInterview() {
                         key
                       )
                     }
+                    className="shrink-0"
                   />
 
-                  {label}
+                  <span>
+                    {label}
+                  </span>
 
                 </label>
 
@@ -618,7 +746,12 @@ export default function CreateInterview() {
 
           <div className="mt-3">
 
-            <label className="block text-xs text-muted mb-1">
+            <label className="
+              block
+              text-xs
+              text-[var(--text-secondary)]
+              mb-1
+            ">
               Interview Duration
               {' '}
               (minutes)
@@ -641,7 +774,19 @@ export default function CreateInterview() {
                     ),
                 })
               }
-              className="w-32 bg-navy2 border border-border rounded-lg px-3 py-2 text-sm text-slate-100 outline-none focus:border-blue2"
+              className="
+                w-full
+                sm:w-32
+                bg-[var(--input-bg)]
+                border border-[var(--border-color)]
+                rounded-lg
+                px-3 py-2
+                text-sm
+                text-[var(--text-primary)]
+                outline-none
+                focus:border-blue2
+                transition-colors
+              "
             />
 
           </div>
@@ -655,7 +800,18 @@ export default function CreateInterview() {
 
         <button
           disabled={saving}
-          className="py-3 rounded-lg bg-blue2 text-white font-bold text-sm disabled:opacity-60"
+          className="
+            w-full
+            py-3
+            rounded-lg
+            bg-blue2
+            text-white
+            font-bold
+            text-sm
+            disabled:opacity-60
+            hover:enabled:opacity-90
+            transition-opacity
+          "
         >
 
           {saving

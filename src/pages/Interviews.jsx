@@ -82,11 +82,26 @@ export default function Interviews() {
   return (
     <AdminLayout title="Interviews">
 
-      <div className="flex justify-end mb-4">
+      {/* =================================================
+          Create Interview
+      ================================================= */}
+
+      <div className="flex justify-end mb-4 sm:mb-5">
 
         <Link
           to="/interviews/create"
-          className="px-4 py-2 rounded-lg bg-blue2 text-white text-sm font-bold"
+          className="
+            w-full sm:w-auto
+            text-center
+            px-4 py-2.5
+            rounded-lg
+            bg-blue2
+            text-white
+            text-sm
+            font-bold
+            hover:opacity-90
+            transition-opacity
+          "
         >
           + Create Interview
         </Link>
@@ -94,145 +109,223 @@ export default function Interviews() {
       </div>
 
 
-      <div className="bg-card border border-border rounded-xl p-5">
+      {/* =================================================
+          Interview Table
+      ================================================= */}
 
-        <table className="w-full text-sm">
+      <div
+        className="
+          w-full
+          bg-[var(--bg-secondary)]
+          border border-[var(--border-color)]
+          rounded-xl
+          p-3 sm:p-4 md:p-5
+          overflow-hidden
+          transition-colors duration-300
+        "
+      >
 
-          <thead>
+        {/* Horizontal scroll on smaller screens */}
 
-            <tr className="text-left text-muted text-xs uppercase font-mono border-b border-border">
+        <div className="w-full overflow-x-auto">
 
-              <th className="pb-2">
-                Candidate
-              </th>
+          <table className="w-full min-w-[800px] text-sm">
 
-              <th className="pb-2">
-                Position
-              </th>
+            <thead>
 
-              <th className="pb-2">
-                Link Status
-              </th>
+              <tr
+                className="
+                  text-left
+                  text-[var(--text-secondary)]
+                  text-xs
+                  uppercase
+                  font-mono
+                  border-b border-[var(--border-color)]
+                "
+              >
 
-              <th className="pb-2">
-                Created
-              </th>
+                <th className="pb-2 pr-4">
+                  Candidate
+                </th>
 
-              <th className="pb-2">
-                Expires
-              </th>
+                <th className="pb-2 pr-4">
+                  Position
+                </th>
 
-              <th className="pb-2">
-                Action
-              </th>
+                <th className="pb-2 pr-4">
+                  Link Status
+                </th>
 
-            </tr>
+                <th className="pb-2 pr-4">
+                  Created
+                </th>
 
-          </thead>
+                <th className="pb-2 pr-4">
+                  Expires
+                </th>
 
+                <th className="pb-2">
+                  Action
+                </th>
 
-          <tbody>
+              </tr>
 
-            {interviews.map(
-              (iv) => (
-
-                <tr
-                  key={iv._id}
-                  className="border-b border-border/50 last:border-0"
-                >
-
-                  <td className="py-2.5 text-slate-100">
-                    {iv.candidate?.name ||
-                      'N/A'}
-                  </td>
-
-
-                  <td className="py-2.5 text-muted">
-                    {iv.position}
-                  </td>
-
-
-                  <td className="py-2.5">
-
-                    <Badge
-                      status={
-                        iv.linkStatus
-                      }
-                    />
-
-                  </td>
+            </thead>
 
 
-                  <td className="py-2.5 text-muted">
-                    {new Date(
-                      iv.createdAt
-                    ).toLocaleDateString()}
-                  </td>
+            <tbody>
 
+              {interviews.map(
+                (iv) => (
 
-                  <td className="py-2.5 text-muted">
-                    {iv.linkExpiresAt
-                      ? new Date(
-                          iv.linkExpiresAt
-                        ).toLocaleDateString()
-                      : 'N/A'}
-                  </td>
+                  <tr
+                    key={iv._id}
+                    className="
+                      border-b
+                      border-[var(--border-color)]/50
+                      last:border-0
+                    "
+                  >
 
-
-                  <td className="py-2.5 flex gap-3">
-
-                    <button
-                      onClick={
-                        copyLink
-                      }
-                      className="text-blue2 hover:underline"
+                    <td
+                      className="
+                        py-3
+                        pr-4
+                        text-[var(--text-primary)]
+                        font-medium
+                        break-words
+                      "
                     >
-                      {copiedId ===
-                      'public-interview'
-                        ? 'Copied!'
-                        : 'Copy Link'}
-                    </button>
+                      {iv.candidate?.name ||
+                        'N/A'}
+                    </td>
 
 
-                    {iv.status ===
-                      'Completed' && (
+                    <td
+                      className="
+                        py-3
+                        pr-4
+                        text-[var(--text-secondary)]
+                        break-words
+                      "
+                    >
+                      {iv.position}
+                    </td>
 
-                      <Link
-                        to={`/interviews/${iv._id}/report`}
-                        className="text-blue2 hover:underline"
-                      >
-                        View
-                      </Link>
 
-                    )}
+                    <td className="py-3 pr-4">
 
+                      <Badge
+                        status={
+                          iv.linkStatus
+                        }
+                      />
+
+                    </td>
+
+
+                    <td
+                      className="
+                        py-3
+                        pr-4
+                        text-[var(--text-secondary)]
+                        whitespace-nowrap
+                      "
+                    >
+                      {new Date(
+                        iv.createdAt
+                      ).toLocaleDateString()}
+                    </td>
+
+
+                    <td
+                      className="
+                        py-3
+                        pr-4
+                        text-[var(--text-secondary)]
+                        whitespace-nowrap
+                      "
+                    >
+                      {iv.linkExpiresAt
+                        ? new Date(
+                            iv.linkExpiresAt
+                          ).toLocaleDateString()
+                        : 'N/A'}
+                    </td>
+
+
+                    <td className="py-3">
+
+                      <div className="flex items-center gap-3">
+
+                        <button
+                          onClick={
+                            copyLink
+                          }
+                          className="
+                            text-blue2
+                            hover:underline
+                            whitespace-nowrap
+                          "
+                        >
+                          {copiedId ===
+                          'public-interview'
+                            ? 'Copied!'
+                            : 'Copy Link'}
+                        </button>
+
+
+                        {iv.status ===
+                          'Completed' && (
+
+                          <Link
+                            to={`/interviews/${iv._id}/report`}
+                            className="
+                              text-blue2
+                              hover:underline
+                              whitespace-nowrap
+                            "
+                          >
+                            View
+                          </Link>
+
+                        )}
+
+                      </div>
+
+                    </td>
+
+                  </tr>
+
+                )
+              )}
+
+
+              {interviews.length ===
+                0 && (
+
+                <tr>
+
+                  <td
+                    colSpan={6}
+                    className="
+                      py-8
+                      text-center
+                      text-[var(--text-secondary)]
+                    "
+                  >
+                    No interviews yet.
                   </td>
 
                 </tr>
 
-              )
-            )}
+              )}
 
+            </tbody>
 
-            {interviews.length ===
-              0 && (
+          </table>
 
-              <tr>
-
-                <td
-                  colSpan={6}
-                  className="py-6 text-center text-muted"
-                >
-                  No interviews yet.
-                </td>
-
-              </tr>
-
-            )}
-
-          </tbody>
-
-        </table>
+        </div>
 
       </div>
 
