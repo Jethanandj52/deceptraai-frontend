@@ -376,52 +376,39 @@ export default function CreateInterview() {
           </label>
 
 
-          <select
-            value={candidateId}
-            onChange={(event) =>
-              setCandidateId(
-                event.target.value
-              )
-            }
-            className="
-              w-full
-              bg-[var(--input-bg)]
-              border border-[var(--border-color)]
-              rounded-lg
-              px-3 py-2.5
-              text-sm
-              text-[var(--text-primary)]
-              outline-none
-              focus:border-blue2
-              transition-colors
-            "
-          >
+         <select
+  value={candidateId}
+  onChange={(event) => setCandidateId(event.target.value)}
+  className="
+    w-full
+    bg-[var(--input-bg)]
+    border border-[var(--border-color)]
+    rounded-lg
+    px-3 py-2.5
+    text-sm
+    text-[var(--text-primary)]
+    outline-none
+    focus:border-blue-500
+    transition-colors
+  "
+>
+  <option
+    value=""
+    className="bg-white text-gray-900 dark:bg-gray-800 dark:text-white"
+  >
+    -- Choose a candidate --
+  </option>
 
-            <option value="">
-              -- Choose a candidate --
-            </option>
-
-
-            {candidates.map(
-              (candidate) => (
-
-                <option
-                  key={
-                    candidate._id
-                  }
-                  value={
-                    candidate._id
-                  }
-                >
-                  {candidate.name}
-                  {' '}
-                  ({candidate.position})
-                </option>
-
-              )
-            )}
-
-          </select>
+  {candidates.map((candidate) => (
+    <option
+      key={candidate._id}
+      value={candidate._id}
+      className="bg-white text-gray-900 dark:bg-gray-800 dark:text-white"
+    >
+      {candidate.name} ({candidate.position})
+    </option>
+  ))}
+</select>
 
         </div>
 
