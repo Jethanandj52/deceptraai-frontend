@@ -5,33 +5,34 @@ const SUPERVISOR = {
   name: 'Dr. Muhammad Asad Abbasi',
   role: 'Project Supervisor · Head Of Department',
   bio: 'Dr. Asad Muhammad Abbasi provides academic and research guidance for the DECEPTRA project, ensuring its alignment with academic standards, research methodology, ethical considerations, and institutional requirements. His expertise and supervision support the successful development and implementation of the project.',
-  photo: '/supervisor.jpg',
+  photo: '/supervisor.jpeg',
 };
 
 const TEAM = [
+   {
+    name: 'Kunwal Rai',
+    role: 'Group Leader (AI & Data Scientist)',
+    bio: 'Focused on data preprocessing and feature extraction pipelines, ensuring clean and reliable input for all modality models.',
+    photo: '/kunwal.jpeg',
+  },
   {
     name: 'Paman',
-    role: 'Group Leader & AI / ML',
+    role: ' AI / ML',
     bio: 'Led the team and developed the core AI and ML algorithms for accurate deception detection across all three modalities.',
-    photo: '/paman.jpg',
+    photo: '/paman.jpeg',
   },
-  {
-    name: 'Kunwal Rai',
-    role: 'AI & Data Scientist',
-    bio: 'Focused on data preprocessing and feature extraction pipelines, ensuring clean and reliable input for all modality models.',
-    photo: '/kunwal.jpg',
-  },
+ 
   {
     name: 'Surendar',
     role: 'Frontend Developer',
     bio: 'Designed and implemented the React dashboard UI, webcam integration, and real-time visualization of results.',
-    photo: '/surendar.jpg',
+    photo: '/surendar.jpeg',
   },
   {
     name: 'Nawal Rai',
     role: 'Backend Developer',
     bio: 'Built and optimized the FastAPI backend, including all four REST endpoints, database design, and API documentation.',
-    photo: '/nawal.jpg',
+    photo: '/nawal.png',
   },
 ];
 
